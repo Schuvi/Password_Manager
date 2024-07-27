@@ -28,7 +28,7 @@ export default function TambahPassword() {
       maxBodyLength: Infinity,
       url: base_url,
       headers: {
-        Authorization: "Bearer e4gn8vclct7evkyc1s1h4j5ldmw1sxrmpz4l920f",
+        Authorization: "Bearer {token}",
       },
       data: data,
     };
