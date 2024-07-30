@@ -22,7 +22,7 @@ export default function Password() {
   const fetch = () => {
     axios
       .get(base_url + "?sheet=Password", {
-        headers: { Authorization: "Bearer e4gn8vclct7evkyc1s1h4j5ldmw1sxrmpz4l920f" },
+        headers: { Authorization: "Bearer {token}" },
       })
       .then((response) => {
         setData(response.data);
@@ -41,7 +41,7 @@ export default function Password() {
     e.preventDefault();
     axios
       .get(base_url + `/search?sheet=Password&nama_aplikasi=${cari}`, {
-        headers: { Authorization: "Bearer e4gn8vclct7evkyc1s1h4j5ldmw1sxrmpz4l920f" },
+        headers: { Authorization: "Bearer {token}" },
       })
       .then((response) => {
         setData(response.data);
@@ -56,7 +56,7 @@ export default function Password() {
     console.log(item.id)
 
     axios.delete(base_url + `/${column}/${item.id}?sheet=Password`, {
-        headers: { Authorization: "Bearer e4gn8vclct7evkyc1s1h4j5ldmw1sxrmpz4l920f" },
+        headers: { Authorization: "Bearer {token}" },
       })
       .then((response) => {
         console.log(response.data);

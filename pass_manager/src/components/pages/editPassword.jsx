@@ -37,7 +37,7 @@ export default function EditPassword() {
       maxBodyLength: Infinity,
       url: base_url+`/${column}/${item.id}?sheet=Password`,
       headers: {
-        Authorization: "Bearer e4gn8vclct7evkyc1s1h4j5ldmw1sxrmpz4l920f",
+        Authorization: "Bearer {token}",
         'Content-Type': 'application/json',
       },
       data: JSON.stringify(data),

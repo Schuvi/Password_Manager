@@ -12,7 +12,7 @@ export default function ForgetPass() {
     e.preventDefault();
     axios
       .get(base_url + `search?username=${username}`, {
-        headers: { Authorization: "Bearer e4gn8vclct7evkyc1s1h4j5ldmw1sxrmpz4l920f" },
+        headers: { Authorization: "Bearer {token}" },
       })
       .then((res) => {
         const resData = res.data[0];

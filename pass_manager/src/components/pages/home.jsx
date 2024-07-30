@@ -16,7 +16,7 @@ export default function Home() {
     const fetch = () => {
         axios
           .get(base_url + "?sheet=Password", {
-            headers: { "Authorization": "Bearer e4gn8vclct7evkyc1s1h4j5ldmw1sxrmpz4l920f" },
+            headers: { "Authorization": "Bearer {token}" },
           })
           .then((response) => {
             setData(response.data);
