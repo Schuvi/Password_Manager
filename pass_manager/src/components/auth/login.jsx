@@ -9,7 +9,9 @@ export default function Login() {
   const [active, setActive] = useState(true);
   const [up, setUp] = useState("");
 
-  const base_url = "https://sheetdb.io/api/v1/243lr64k6j0xy/";
+  const base_url = import.meta.env.API_URL;
+  const api_token = import.meta.env.API_TOKEN;
+
   const navigate = useNavigate();
 
   const hover = () => {
@@ -22,7 +24,7 @@ export default function Login() {
     e.preventDefault();
     axios
       .get(base_url + `search?username=${username}`, {
-        headers: { Authorization: "Bearer {Token}" },
+        headers: { 'Authorization': `Bearer ${api_token}` },
       })
       .then((res) => {
         const resData = res.data[0];
@@ -32,7 +34,7 @@ export default function Login() {
           return;
         }
 
-        if (resData.username == username && resData.password == password && token == "258456" || token == "350123") {
+        if (resData.username == username && resData.password == password && token == import.meta.env.TOKEN_WEBSITE || token == "350123") {
           window.localStorage.setItem("token", resData);
           window.localStorage.setItem("loggedIn", true);
           window.localStorage.setItem("Username", username);
@@ -40,7 +42,7 @@ export default function Login() {
           window.location.href = "/";
         } else if (!resData) {
           alert("Username Tidak Ditemukan, Kamu Siapa?");
-        } else if (resData.password !== password && token !== "258456" || token !== "350123") {
+        } else if (resData.password !== password && token !== import.meta.env.TOKEN_WEBSITE || token !== "350123") {
           alert("Password / Token Anda Salah!");
         } else {
           alert("Gagal, Kamu Siapa?");
@@ -78,7 +80,7 @@ export default function Login() {
         <div class="relative w-[25vw] mb-5">
           <input
             type="password"
-            id="floating_outlined"
+            id="floating_outlined_pass"
             class="block px-2.5 pb-2.5 pt-4 w-full text-md text-white bg-transparent rounded-lg border-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-black peer"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -87,7 +89,7 @@ export default function Login() {
             autoComplete="off"
           />
           <label
-            for="floating_outlined"
+            for="floating_outlined_pass"
             class="absolute text-md text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-green-400 px-2 peer-focus:px-2 peer-focus:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
           >
             Password
@@ -97,7 +99,7 @@ export default function Login() {
         <div class="relative w-[25vw] mb-5">
           <input
             type="password"
-            id="floating_outlined"
+            id="floating_outlined_token"
             class="block px-2.5 pb-2.5 pt-4 w-full text-md text-white bg-transparent rounded-lg border-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-black peer"
             value={token}
             onChange={(e) => setToken(e.target.value)}
@@ -106,7 +108,7 @@ export default function Login() {
             autoComplete="off"
           />
           <label
-            for="floating_outlined"
+            for="floating_outlined_token"
             class="absolute text-md text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-green-400 px-2 peer-focus:px-2 peer-focus:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
           >
             Token

@@ -6,13 +6,14 @@ export default function ForgetPass() {
   const [username, setUsername] = useState("");
   const [hasil, setHasil] = useState("");
 
-  const base_url = "https://sheetdb.io/api/v1/243lr64k6j0xy/";
+  const base_url = import.meta.env.API_URL;
+  const api_token = import.meta.env.API_TOKEN;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .get(base_url + `search?username=${username}`, {
-        headers: { Authorization: "Bearer {token}" },
+        headers: { Authorization: `Bearer ${api_token}` },
       })
       .then((res) => {
         const resData = res.data[0];

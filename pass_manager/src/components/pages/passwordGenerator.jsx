@@ -7,8 +7,6 @@ export default function PassGenerator() {
   const [hasil, setHasil] = useState("");
   const [copy, setCopy] = useState("")
 
-  const base_url = "https://sheetdb.io/api/v1/243lr64k6j0xy/";
-
   const generatePassword = (prefixOptions = ["Satraaliyu", "Satrashufi"], length = 16) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=';
     let result = '';

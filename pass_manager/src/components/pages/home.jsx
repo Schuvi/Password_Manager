@@ -4,19 +4,21 @@ import axios from "axios";
 export default function Home() {
     const user = window.localStorage.getItem("Username")
     
-    const base_url = "https://sheetdb.io/api/v1/243lr64k6j0xy";
+    const base_url = import.meta.env.API_URL;
+    const api_token = import.meta.env.API_TOKEN;
+    const sheet = import.meta.env.SHEET;
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        // fetch()
+        fetch()
     }, [])
 
     const fetch = () => {
         axios
-          .get(base_url + "?sheet=Password", {
-            headers: { "Authorization": "Bearer {token}" },
+          .get(base_url + `?sheet=${sheet}`, {
+            headers: { "Authorization": `Bearer ${api_token}` },
           })
           .then((response) => {
             setData(response.data);

@@ -11,7 +11,9 @@ export default function Password() {
   const [column, setColumn] = useState("id");
   const [value, setValue] = useState("");
 
-  const base_url = "https://sheetdb.io/api/v1/243lr64k6j0xy";
+  const base_url = import.meta.env.API_URL;
+  const api_token = import.meta.env.API_TOKEN;
+  const sheet = import.meta.env.SHEET;
 
   const navigate = useNavigate()
 
@@ -21,8 +23,8 @@ export default function Password() {
 
   const fetch = () => {
     axios
-      .get(base_url + "?sheet=Password", {
-        headers: { Authorization: "Bearer {token}" },
+      .get(base_url + `?sheet=${sheet}`, {
+        headers: { Authorization: `Bearer ${api_token}` },
       })
       .then((response) => {
         setData(response.data);
@@ -40,8 +42,8 @@ export default function Password() {
   const search = (e) => {
     e.preventDefault();
     axios
-      .get(base_url + `/search?sheet=Password&nama_aplikasi=${cari}`, {
-        headers: { Authorization: "Bearer {token}" },
+      .get(base_url + `/search?sheet=${sheet}&nama_aplikasi=${cari}`, {
+        headers: { Authorization: `Bearer ${api_token}` },
       })
       .then((response) => {
         setData(response.data);
@@ -55,8 +57,8 @@ export default function Password() {
   const hapus = (item) => {
     console.log(item.id)
 
-    axios.delete(base_url + `/${column}/${item.id}?sheet=Password`, {
-        headers: { Authorization: "Bearer {token}" },
+    axios.delete(base_url + `/${column}/${item.id}?sheet=${sheet}`, {
+        headers: { Authorization: `Bearer ${api_token}` },
       })
       .then((response) => {
         console.log(response.data);

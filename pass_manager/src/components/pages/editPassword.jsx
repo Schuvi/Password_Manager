@@ -7,7 +7,9 @@ export default function EditPassword() {
   const {item} = location.state
   const navigate = useNavigate()
 
-  const base_url = "https://sheetdb.io/api/v1/243lr64k6j0xy";
+  const base_url = import.meta.env.API_URL;
+  const api_token = import.meta.env.API_TOKEN;
+  const sheet = import.meta.env.SHEET;
 
   const date = new Date();
   const time = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -35,9 +37,9 @@ export default function EditPassword() {
     const config = {
       method: "patch",
       maxBodyLength: Infinity,
-      url: base_url+`/${column}/${item.id}?sheet=Password`,
+      url: base_url+`/${column}/${item.id}?sheet=${sheet}`,
       headers: {
-        Authorization: "Bearer {token}",
+        Authorization: `Bearer ${api_token}`,
         'Content-Type': 'application/json',
       },
       data: JSON.stringify(data),

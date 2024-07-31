@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function TambahPassword() {
-  const base_url = "https://sheetdb.io/api/v1/243lr64k6j0xy?sheet=Password";
+  const base_url = import.meta.env.API_URL;
+  const api_token = import.meta.env.API_TOKEN;
+  const sheet = import.meta.env.SHEET;
 
   const date = new Date();
   const time = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -28,7 +30,7 @@ export default function TambahPassword() {
       maxBodyLength: Infinity,
       url: base_url,
       headers: {
-        Authorization: "Bearer {token}",
+        Authorization: `Bearer ${api_token}`,
       },
       data: data,
     };
