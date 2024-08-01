@@ -3,13 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function EditPassword() {
-  const location = useLocation()
-  const {item} = location.state
-  const navigate = useNavigate()
+  const location = useLocation();
+  const { item } = location.state;
+  const navigate = useNavigate();
 
-  const base_url = import.meta.env.API_URL;
-  const api_token = import.meta.env.API_TOKEN;
-  const sheet = import.meta.env.SHEET;
+  const base_url = "http://localhost:2000/edit";
 
   const date = new Date();
   const time = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -27,22 +25,18 @@ export default function EditPassword() {
 
     const data = {
       id: id,
-      nama_aplikasi: nama,
+      nama: nama,
       username: username,
       password: password,
-      tanggal_pembuatan: waktu,
-      tanggal_edit: waktuEdit,
-    }
+      waktu: waktu,
+      waktuEdit: waktuEdit,
+    };
 
     const config = {
       method: "patch",
       maxBodyLength: Infinity,
-      url: base_url+`/${column}/${item.id}?sheet=${sheet}`,
-      headers: {
-        Authorization: `Bearer ${api_token}`,
-        'Content-Type': 'application/json',
-      },
-      data: JSON.stringify(data),
+      url: base_url,
+      data: data,
     };
 
     axios
@@ -52,8 +46,7 @@ export default function EditPassword() {
 
         if (response.data.updated == 1) {
           alert("Data Berhasil Ditambahkan");
-          navigate("/password")
-
+          navigate("/password");
         } else {
           alert("Data Gagal Ditambahkan");
         }

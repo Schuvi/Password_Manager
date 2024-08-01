@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:2000"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_TOKEN=${VITE_API_TOKEN}
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_TOKEN_WEBSITE=${VITE_TOKEN_WEBSITE}
+      - VITE_API_TOKEN2=${VITE_API_TOKEN2}
+      - VITE_API_URL2=${VITE_API_URL2}
+      - VITE_SHEET=${VITE_SHEET}
+      - PORT=${PORT}
+    # ... tambahkan variabel lingkungan lainnya yang Anda butuhkan

@@ -6,15 +6,12 @@ export default function ForgetPass() {
   const [username, setUsername] = useState("");
   const [hasil, setHasil] = useState("");
 
-  const base_url = import.meta.env.API_URL;
-  const api_token = import.meta.env.API_TOKEN;
+  const base_url = "http://localhost:2000/login";
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .get(base_url + `search?username=${username}`, {
-        headers: { Authorization: `Bearer ${api_token}` },
-      })
+      .get(`${base_url}?username=${username}`)
       .then((res) => {
         const resData = res.data[0];
 
@@ -35,7 +32,7 @@ export default function ForgetPass() {
 
   const copy = () => {
     navigator.clipboard.writeText(hasil);
-  }
+  };
 
   return (
     <section className=" h-full w-full flex flex-col justify-center items-center">
@@ -62,7 +59,9 @@ export default function ForgetPass() {
         </div>
 
         <h1>Password Kamu :</h1>
-        <h1 className="mb-10 cursor-pointer" onClick={copy}>{hasil}</h1>
+        <h1 className="mb-10 cursor-pointer" onClick={copy}>
+          {hasil}
+        </h1>
 
         <Link className="mb-5 text-white hover:text-black" to="/login">
           Login Disini!

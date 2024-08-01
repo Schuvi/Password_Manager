@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function TambahPassword() {
-  const base_url = import.meta.env.API_URL;
-  const api_token = import.meta.env.API_TOKEN;
-  const sheet = import.meta.env.SHEET;
+  const base_url = "http://localhost:2000/create";
 
   const date = new Date();
   const time = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -18,20 +16,18 @@ export default function TambahPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("id", id);
-    data.append("nama_aplikasi", nama);
-    data.append("username", username);
-    data.append("password", password);
-    data.append("tanggal_pembuatan", waktu);
+    const data = {
+      id: id,
+      nama: nama,
+      username: username,
+      password: password,
+      waktu: waktu,
+    };
 
     const config = {
       method: "post",
       maxBodyLength: Infinity,
       url: base_url,
-      headers: {
-        Authorization: `Bearer ${api_token}`,
-      },
       data: data,
     };
 

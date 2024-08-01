@@ -24,3 +24,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.firebase
+*.cjs
+.firebaserc
+firebase.json
+nginx.conf

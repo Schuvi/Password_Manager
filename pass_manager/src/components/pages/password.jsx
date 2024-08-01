@@ -11,28 +11,24 @@ export default function Password() {
   const [column, setColumn] = useState("id");
   const [value, setValue] = useState("");
 
-  const base_url = import.meta.env.API_URL;
-  const api_token = import.meta.env.API_TOKEN;
-  const sheet = import.meta.env.SHEET;
+  const base_url = "http://localhost:2000";
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch()
+    fetch();
   }, []);
 
   const fetch = () => {
     axios
-      .get(base_url + `?sheet=${sheet}`, {
-        headers: { Authorization: `Bearer ${api_token}` },
-      })
+      .get(base_url + "/get")
       .then((response) => {
         setData(response.data);
         console.log(data);
       })
       .catch((error) => {
         console.log(error);
-    });
+      });
   };
 
   const tampilkanSemua = () => {
@@ -42,37 +38,33 @@ export default function Password() {
   const search = (e) => {
     e.preventDefault();
     axios
-      .get(base_url + `/search?sheet=${sheet}&nama_aplikasi=${cari}`, {
-        headers: { Authorization: `Bearer ${api_token}` },
-      })
+      .get(base_url + `/search?nama_aplikasi=${cari}`)
       .then((response) => {
         setData(response.data);
         console.log(data);
       })
       .catch((error) => {
         console.log(error.message);
-    });
+      });
   };
 
   const hapus = (item) => {
-    console.log(item.id)
+    console.log(item.id);
 
-    axios.delete(base_url + `/${column}/${item.id}?sheet=${sheet}`, {
-        headers: { Authorization: `Bearer ${api_token}` },
-      })
+    axios
+      .delete(base_url + `/hapus?id=${item.id}`)
       .then((response) => {
         console.log(response.data);
         if (response.data.deleted == 1) {
-            alert("Data berhasil dihapus");
-            window.location.reload()
+          alert("Data berhasil dihapus");
+          window.location.reload();
         }
-
-    });
+      });
   };
 
   const edit = (item) => {
-    navigate("/edit", { state: { item: item } })
-  }
+    navigate("/edit", { state: { item: item } });
+  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -131,8 +123,12 @@ export default function Password() {
                       <td className="border-r p-2">{item.password}</td>
                       <td className="border-r p-2">{item.tanggal_pembuatan}</td>
                       <td className="border-r p-2">
-                        <button className="mr-3 border rounded-lg w-[5vw] bg-blue-400 text-white" onClick={() => edit(item)}>Edit</button>
-                        <button className="border rounded-lg w-[6vw] bg-red-500 text-white" onClick={() => hapus(item)}>Hapus</button>
+                        <button className="mr-3 border rounded-lg w-[5vw] bg-blue-400 text-white" onClick={() => edit(item)}>
+                          Edit
+                        </button>
+                        <button className="border rounded-lg w-[6vw] bg-red-500 text-white" onClick={() => hapus(item)}>
+                          Hapus
+                        </button>
                       </td>
                     </tr>
                   );

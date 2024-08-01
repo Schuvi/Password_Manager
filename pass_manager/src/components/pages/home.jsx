@@ -2,80 +2,76 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Home() {
-    const user = window.localStorage.getItem("Username")
-    
-    const base_url = import.meta.env.API_URL;
-    const api_token = import.meta.env.API_TOKEN;
-    const sheet = import.meta.env.SHEET;
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(5);
-    const [data, setData] = useState([]);
+  const user = window.localStorage.getItem("Username");
 
-    useEffect(() => {
-        fetch()
-    }, [])
+  const base_url = "http://localhost:3000/get";
 
-    const fetch = () => {
-        axios
-          .get(base_url + `?sheet=${sheet}`, {
-            headers: { "Authorization": `Bearer ${api_token}` },
-          })
-          .then((response) => {
-            setData(response.data);
-            console.log(data);
-          })
-          .catch((error) => {
-            console.log(error);
-        });
-    };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+  const [data, setData] = useState([]);
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  useEffect(() => {
+    fetch();
+  }, []);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const fetch = () => {
+    axios
+      .get(base_url)
+      .then((response) => {
+        setData(response.data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    return (
-        <>
-            <section className="h-full flex flex-col items-center font-ubuntu">
-                <div className="container items-center flex flex-col font-ubuntu mb-5">
-                    <h1 className="text-3xl font-bold mb-3">Beranda</h1>
-                    <h1 className="text-xl">Selamat Datang {user}</h1>
-                </div>
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-                <div className="container">
-                    <h1>Ringkasan Perubahan Password :</h1>
-                    <table className="border-2 table-auto w-full">
-                        <thead>
-                            <tr className="text-center font-bold bg-f1 text-white">
-                            <td className="border-r">No.</td>
-                            <td className="border-r">Nama Aplikasi</td>
-                            <td className="border-r">Waktu Edit</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {currentItems.map((item) => {
-                            return (
-                                <tr key={item.id} className="border-b text-center">
-                                <td className="border-r p-2">{item.id}</td>
-                                <td className="border-r p-2">{item.nama_aplikasi}</td>
-                                <td className="border-r p-2">{item.tanggal_edit}</td>
-                                </tr>
-                            );
-                            })}
-                        </tbody>
-                    </table>
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-                    <div className="pagination text-center">
-                        {[...Array(Math.ceil(data.length / itemsPerPage)).keys()].map((number) => (
-                            <button key={number + 1} onClick={() => paginate(number + 1)} className={`m-2 ${currentPage === number + 1 ? "bg-gray-300" : "bg-white"}`}>
-                            {number + 1}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+  return (
+    <>
+      <section className="h-full flex flex-col items-center font-ubuntu">
+        <div className="container items-center flex flex-col font-ubuntu mb-5">
+          <h1 className="text-3xl font-bold mb-3">Beranda</h1>
+          <h1 className="text-xl">Selamat Datang {user}</h1>
+        </div>
 
-            </section>
-        </>
-    )
+        <div className="container">
+          <h1>Ringkasan Perubahan Password :</h1>
+          <table className="border-2 table-auto w-full">
+            <thead>
+              <tr className="text-center font-bold bg-f1 text-white">
+                <td className="border-r">No.</td>
+                <td className="border-r">Nama Aplikasi</td>
+                <td className="border-r">Waktu Edit</td>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.map((item) => {
+                return (
+                  <tr key={item.id} className="border-b text-center">
+                    <td className="border-r p-2">{item.id}</td>
+                    <td className="border-r p-2">{item.nama_aplikasi}</td>
+                    <td className="border-r p-2">{item.tanggal_edit}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+
+          <div className="pagination text-center">
+            {[...Array(Math.ceil(data.length / itemsPerPage)).keys()].map((number) => (
+              <button key={number + 1} onClick={() => paginate(number + 1)} className={`m-2 ${currentPage === number + 1 ? "bg-gray-300" : "bg-white"}`}>
+                {number + 1}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

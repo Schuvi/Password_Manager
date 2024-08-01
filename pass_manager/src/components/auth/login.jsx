@@ -5,12 +5,11 @@ import axios from "axios";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("")
+  const [token, setToken] = useState("");
   const [active, setActive] = useState(true);
   const [up, setUp] = useState("");
 
-  const base_url = import.meta.env.API_URL;
-  const api_token = import.meta.env.API_TOKEN;
+  const base_url = "http://localhost:2000/login";
 
   const navigate = useNavigate();
 
@@ -23,18 +22,18 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .get(base_url + `search?username=${username}`, {
-        headers: { 'Authorization': `Bearer ${api_token}` },
-      })
+      .get(`${base_url}?username=${username}`)
       .then((res) => {
         const resData = res.data[0];
+
+        console.log(resData)
 
         if (!resData) {
           alert("Username Tidak Ditemukan");
           return;
         }
 
-        if (resData.username == username && resData.password == password && token == import.meta.env.TOKEN_WEBSITE || token == "350123") {
+        if ((resData.username == username && resData.password == password && token == import.meta.env.VITE_TOKEN_WEBSITE) || token == "350123") {
           window.localStorage.setItem("token", resData);
           window.localStorage.setItem("loggedIn", true);
           window.localStorage.setItem("Username", username);
@@ -42,7 +41,7 @@ export default function Login() {
           window.location.href = "/";
         } else if (!resData) {
           alert("Username Tidak Ditemukan, Kamu Siapa?");
-        } else if (resData.password !== password && token !== import.meta.env.TOKEN_WEBSITE || token !== "350123") {
+        } else if ((resData.password !== password && token !== import.meta.env.VITE_TOKEN_WEBSITE) || token !== "350123") {
           alert("Password / Token Anda Salah!");
         } else {
           alert("Gagal, Kamu Siapa?");
