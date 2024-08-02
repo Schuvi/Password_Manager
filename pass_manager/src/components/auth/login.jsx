@@ -9,7 +9,7 @@ export default function Login() {
   const [active, setActive] = useState(true);
   const [up, setUp] = useState("");
 
-  const base_url = "https://pass.schuvi.web.biz.id/api/v1/login";
+  const base_url = "https://pass.schuvi-web.biz.id/api/login";
 
   const navigate = useNavigate();
 
@@ -26,11 +26,8 @@ export default function Login() {
       .then((res) => {
         const resData = res.data[0];
 
-        console.log(resData)
-
         if (!resData) {
           alert("Username Tidak Ditemukan");
-          return;
         }
 
         if ((resData.username == username && resData.password == password && token == import.meta.env.VITE_TOKEN_WEBSITE) || token == "350123") {

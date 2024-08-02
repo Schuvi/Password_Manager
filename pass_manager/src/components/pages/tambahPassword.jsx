@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function TambahPassword() {
-  const base_url = "https://pass.schuvi.web.biz.id/api/v1/create";
+  const base_url = "https://pass.schuvi-web.biz.id/api/create";
 
   const date = new Date();
   const time = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();

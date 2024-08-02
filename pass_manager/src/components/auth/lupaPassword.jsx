@@ -6,7 +6,7 @@ export default function ForgetPass() {
   const [username, setUsername] = useState("");
   const [hasil, setHasil] = useState("");
 
-  const base_url = "https://pass.schuvi.web.biz.id/api/v1/login";
+  const base_url = "https://pass.schuvi-web.biz.id/api/login";
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -11,7 +11,7 @@ export default function Password() {
   const [column, setColumn] = useState("id");
   const [value, setValue] = useState("");
 
-  const base_url = "https://pass.schuvi.web.biz.id/api/v1/get";
+  const base_url = "https://pass.schuvi-web.biz.id/api";
 
   const navigate = useNavigate();
 
@@ -51,15 +51,13 @@ export default function Password() {
   const hapus = (item) => {
     console.log(item.id);
 
-    axios
-      .delete(base_url + `/hapus?id=${item.id}`)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.deleted == 1) {
-          alert("Data berhasil dihapus");
-          window.location.reload();
-        }
-      });
+    axios.delete(base_url + `/hapus?id=${item.id}`).then((response) => {
+      console.log(response.data);
+      if (response.data.deleted == 1) {
+        alert("Data berhasil dihapus");
+        window.location.reload();
+      }
+    });
   };
 
   const edit = (item) => {
