@@ -4,7 +4,7 @@ import axios from "axios";
 export default function Home() {
   const user = window.localStorage.getItem("Username");
 
-  const base_url = "https://pass.schuvi-web.biz.id/api/get";
+  const base_url = "https://schuvi-web.biz.id/api/get";
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);

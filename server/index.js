@@ -13,21 +13,12 @@ const base_url2 = process.env.VITE_API_URL2;
 const sheet = process.env.VITE_SHEET;
 
 const corsOptions = {
-  origin: "https://pass.schuvi-web.biz.id",
+  origin: "https://schuvi-web.biz.id",
   optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
-
-app.use((req, res, next) => {
-  const origin = req.get("origin");
-  if (origin !== "https://pass.schuvi-web.biz.id") {
-    return res.status(403).json({ error: "Forbidden" });
-  }
-  next();
-});
 
 app.get("/api/get", async (req, res) => {
   try {

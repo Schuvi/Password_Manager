@@ -11,7 +11,7 @@ export default function Password() {
   const [column, setColumn] = useState("id");
   const [value, setValue] = useState("");
 
-  const base_url = "https://pass.schuvi-web.biz.id/api";
+  const base_url = "https://schuvi-web.biz.id/api";
 
   const navigate = useNavigate();
 

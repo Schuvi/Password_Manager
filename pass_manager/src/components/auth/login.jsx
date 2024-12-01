@@ -9,7 +9,7 @@ export default function Login() {
   const [active, setActive] = useState(true);
   const [up, setUp] = useState("");
 
-  const base_url = "https://pass.schuvi-web.biz.id/api/login";
+  const base_url = "https://schuvi-web.biz.id/api/login";
 
   const navigate = useNavigate();
 

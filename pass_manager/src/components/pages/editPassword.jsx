@@ -7,7 +7,7 @@ export default function EditPassword() {
   const { item } = location.state;
   const navigate = useNavigate();
 
-  const base_url = "https://pass.schuvi-web.biz.id/api/edit";
+  const base_url = "https://schuvi-web.biz.id/api/edit";
 
   const date = new Date();
   const time = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
